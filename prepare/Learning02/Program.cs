@@ -30,7 +30,7 @@ class Program
             myResume._jobs.Add(job1);
 
             Console.Write("Go again? (y/n)");
-            jobinfo = Console.ReadLine()
+            jobinfo = Console.ReadLine();
             
         }
         
