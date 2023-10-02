@@ -7,22 +7,72 @@ using System;
 
 class Program
 {
+    class Messages
+    {
+        string message = "";
+        public string DisplayIntro()
+            {
+                Console.Clear();
+                message = "Welcome to the journal app!";
+                return message;
+            }
+
+        public string DisplayOutro()
+            {
+                message = "Thank you for using the app!";
+                return message;
+            }
+    }
+    
     static void Main(string[] args)
     {
-        string choice = "Y";
-        while (choice != "Q")
+        int choice = 0;
+        Messages myMessage = new Messages();
+        Console.WriteLine(myMessage.DisplayIntro());
+
+        while (choice != 5)
         {
             //choices 1 through 5
+            Console.Clear();
             Console.WriteLine("1 - Write a new entry from prompt.");
             Console.WriteLine("2 - Display the journal entries.");
             Console.WriteLine("3 - Save the journal to a file.");
             Console.WriteLine("4 - Load the journal from a file.");
-            Console.WriteLine("Q - Quit the program.");
+            Console.WriteLine("5 - Quit the program.");
             Console.Write("Please input your choice: ");
-            choice = Console.ReadLine();
+            choice = int.Parse(Console.ReadLine());
 
-            choice = choice.ToUpper();
-            Console.WriteLine(choice);
+            if (choice == 1)
+            {
+                Prompt newPrompt = new Prompt();
+                newPrompt.PromptPick();
+                Entry newEntry = new Entry();
+                newEntry.AddEntry();
+            }
+            else if (choice == 2)
+            {
+                Journal myJournal = new Journal();
+                myJournal.DisplayEntries();
+            }
+            else if (choice == 3)
+            {
+                FileManager fileManagerSave = new FileManager();
+            }
+            else if (choice == 4)
+            {
+                FileManager fileManagerLoad = new FileManager();
+            }
+            else if (choice == 5)
+            {
+                Console.WriteLine(myMessage.DisplayOutro());
+            }
+            else 
+            {
+                Console.WriteLine("Invalid Entry");
+                Console.ReadKey(true);
+            }
+            //for showing the choice
+            //Console.WriteLine(choice);
         }
     }
 }
