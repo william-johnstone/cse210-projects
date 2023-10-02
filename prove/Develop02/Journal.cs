@@ -1,10 +1,10 @@
 public class Journal
 {
-    public List<Entry> entry = new List<Entry>();
+    public List<Entry> entries = new List<Entry>();
     
     public void DisplayEntries()
     {
-        foreach (Entry entry in entry)
+        foreach (Entry entry in entries)
         {
             entry.ViewEntry();
         }

@@ -31,6 +31,7 @@ class Program
         Console.WriteLine(myMessage.DisplayIntro());
 
         Journal myJournal = new Journal();
+        FileManager fileManager = new FileManager();
         Console.Clear();
         while (choice != 5)
         {
@@ -49,7 +50,7 @@ class Program
                 newPrompt.PromptPick();
                 Entry newEntry = new Entry();
                 newEntry.AddEntry();
-                myJournal.entry.Add(newEntry);
+                myJournal.entries.Add(newEntry);
 
             }
             else if (choice == 2)
@@ -58,11 +59,11 @@ class Program
             }
             else if (choice == 3)
             {
-                FileManager fileManagerSave = new FileManager();
+                fileManager.FileSave();
             }
             else if (choice == 4)
             {
-                FileManager fileManagerLoad = new FileManager();
+                fileManager.FileLoad();
             }
             else if (choice == 5)
             {
