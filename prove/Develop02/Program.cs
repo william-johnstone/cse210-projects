@@ -30,10 +30,11 @@ class Program
         Messages myMessage = new Messages();
         Console.WriteLine(myMessage.DisplayIntro());
 
+        Journal myJournal = new Journal();
+        Console.Clear();
         while (choice != 5)
         {
             //choices 1 through 5
-            Console.Clear();
             Console.WriteLine("1 - Write a new entry from prompt.");
             Console.WriteLine("2 - Display the journal entries.");
             Console.WriteLine("3 - Save the journal to a file.");
@@ -48,10 +49,11 @@ class Program
                 newPrompt.PromptPick();
                 Entry newEntry = new Entry();
                 newEntry.AddEntry();
+                myJournal.entry.Add(newEntry);
+
             }
             else if (choice == 2)
             {
-                Journal myJournal = new Journal();
                 myJournal.DisplayEntries();
             }
             else if (choice == 3)
