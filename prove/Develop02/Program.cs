@@ -31,11 +31,11 @@ class Program
         Console.WriteLine(myMessage.DisplayIntro());
 
         Journal myJournal = new Journal();
-        FileManager fileManager = new FileManager();
-        Console.Clear();
+
         while (choice != 5)
         {
             //choices 1 through 5
+            Console.Clear();
             Console.WriteLine("1 - Write a new entry from prompt.");
             Console.WriteLine("2 - Display the journal entries.");
             Console.WriteLine("3 - Save the journal to a file.");
@@ -59,11 +59,11 @@ class Program
             }
             else if (choice == 3)
             {
-                fileManager.FileSave();
+                myJournal.FileSave();
             }
             else if (choice == 4)
             {
-                fileManager.FileLoad();
+                myJournal.FileLoad();
             }
             else if (choice == 5)
             {
