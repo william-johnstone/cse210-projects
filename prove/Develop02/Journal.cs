@@ -1,3 +1,5 @@
+using System;
+
 public class Journal
 {
     public List<Entry> entries = new List<Entry>();
@@ -19,14 +21,17 @@ public class Journal
         {
             foreach (Entry entry in entries)
             {
-                outputFile.WriteLine($"{entry}|");
+                outputFile.WriteLine($"{entry.entryDate} | {entry.entryContent}");
             }
         }
     }
 
-    public void FileLoad()
+    public static List<Entry> FileLoad()
     {
+        string _filename = "journal.txt";
         Console.WriteLine("Loading from file...");
+
+        List<Entry> entries = new List<Entry>();
         string[] lines = System.IO.File.ReadAllLines(_filename);
 
         //this needs to get the lines in and get them back in the journal
@@ -34,5 +39,7 @@ public class Journal
         {
             Console.WriteLine(line);
         }
+        Console.ReadKey(true);
+        return entries;
     }
 }

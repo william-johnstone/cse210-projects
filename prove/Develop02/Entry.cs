@@ -11,6 +11,6 @@ public class Entry
     }
     public void ViewEntry()
     {
-        Console.WriteLine($"{entryDate} - {entryContent}");
+        Console.WriteLine($"{entryDate} | {entryContent}");
     }
 }

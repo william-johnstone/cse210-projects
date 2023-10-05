@@ -1,3 +1,6 @@
-Entry|
-Entry|
-Entry|
+10/5/2023 | potato
+10/5/2023 | lemon
+10/5/2023 | pear
+10/5/2023 | apple
+10/5/2023 | banana
+10/5/2023 | orange
