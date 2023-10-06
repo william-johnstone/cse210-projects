@@ -17,6 +17,8 @@ public class Prompt
         prompts.Add("How did I see the hand of the Lord in my life today?");
         prompts.Add("What was the strongest emotion I felt today?");
         prompts.Add("If I had one thing I could do over today, what would it be?");
+        prompts.Add("Where did you go today?");
+        prompts.Add("When did you get up today?");
 
         //this section figures out the max number of prompts and then pulls one at random to return
         maxRnd = prompts.Count();

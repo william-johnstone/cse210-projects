@@ -1,6 +1,6 @@
 using System;
 
-//classes: Journal, Prompt, Entry, FileManager
+//classes: Journal, Prompt, Entry
 //journal class - manage entries, add entries, display entries, save entries to file, load entries from file
 //entry class - store entries and data
 //prompt class - list of prompts and randomly select one
@@ -74,8 +74,6 @@ class Program
                 Console.WriteLine("Invalid Entry");
                 Console.ReadKey(true);
             }
-            //for showing the choice
-            //Console.WriteLine(choice);
         }
     }
 }
