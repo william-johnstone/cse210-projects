@@ -63,7 +63,7 @@ class Program
             }
             else if (choice == 4)
             {
-                Journal.FileLoad();
+                myJournal.FileLoad();
             }
             else if (choice == 5)
             {

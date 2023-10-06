@@ -26,20 +26,28 @@ public class Journal
         }
     }
 
-    public static List<Entry> FileLoad()
+    public void FileLoad()
     {
-        string _filename = "journal.txt";
+        //string _filename = "journal.txt";
         Console.WriteLine("Loading from file...");
 
-        List<Entry> entries = new List<Entry>();
         string[] lines = System.IO.File.ReadAllLines(_filename);
 
         //this needs to get the lines in and get them back in the journal
         foreach (string line in lines)
         {
-            Console.WriteLine(line);
+            //Console.WriteLine(line);
+            string[] p1 = line.Split('|');
+            //this if checks for valid entries that have both a date and a content
+            if (p1.Count()==2)
+            {
+                Entry one = new Entry();
+                one.entryDate=p1[0].Trim();
+                one.entryContent=p1[1].Trim();
+                entries.Add(one);
+                //entries.Add(new Entry{entryDate=p1[0].Trim(), entryContent=p1[1].Trim()});
+            }                
         }
-        Console.ReadKey(true);
-        return entries;
+        //Console.ReadKey(true);
     }
 }
