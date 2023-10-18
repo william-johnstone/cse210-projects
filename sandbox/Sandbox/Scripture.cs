@@ -1,72 +1,73 @@
 class Scripture
 {
-    //this variable could be used to create a custom file
-    private string _filename = "scriptures.txt";
-    //used to help get the lines information
-    private string[] _fileContent;
-    //setter getter for the full book chapter verse
-    private string ScriptureSource
+    public string ScriptureSource;
+    private static readonly List<Word> originalWords = new List<Word>();
+    private List<Word> modifiedWords = new List<Word>();
+
+    public void ParseScriptureSource()
     {
-        set; get;
-    }
-    //setter getter for the scripture text from Reference
-    public Word ScriptureText
+        string[] individualWords = ScriptureSource.Split(" ");
+        foreach (string individualWord in individualWords)
         {
-            private set; get;
+            Word wordmod = new Word(individualWord);
+            Word wordorig = new Word(individualWord);
+            modifiedWords.Add(wordmod);
+            originalWords.Add(wordorig);
         }
-    //setter getter for Book
-    public string ScriptureBook
-        {
-            private set; get;
-        }
-    
-    public string ScriptureChapter
-        {
-            private set; get;
-        }
-    public string ScriptureVerse
-        {
-            private set; get;
-        }
-    public string OriginalScriptureFormat
-    {
-        private set; get;
+
     }
 
-    private void ReadFile()
+    public void ChangeWords()
     {
-        _fileContent = File.ReadAllLines(_filename);
-    }
-
-    public void ScriptureLoad()
-    {
-        ReadFile();
-        int _lineScripture = new Random().Next(0, _fileContent.Count());
-        string line = _fileContent[_lineScripture].Replace("\"", "");
-        string[] lineParts = line.Split('|');
-        ScriptureSource = lineParts[0];
-        ScriptureText = new Word(lineParts[1]);
-        string[] sourceParts = ScriptureSource.Split(',');
-        ScriptureBook = sourceParts[0];
-        ScriptureChapter = sourceParts[1];
-        ScriptureVerse = sourceParts[2];
-        OriginalScriptureFormat = $"{ScriptureBook} {ScriptureChapter}:{ScriptureVerse} {ScriptureText.WholeScripture}";
-    }
-
-    //This method can be called to get a consistent format with the ScriptureText.ModifiedScripture method using the Reference object
-    public string ModifiedScripture
-    {
-        get
+        Random rnd = new Random();
+        int hide = rnd.Next(2, 5);
+        while (hide != 0 && !IsComplete()) 
         {
-            return $"{ScriptureBook} {ScriptureChapter}:{ScriptureVerse} {ScriptureText.ModifiedScripture}";
+            ChangeSingleWord();
+            hide--;
+        }
+        
+    }
+    private void ChangeSingleWord()
+    {
+        List<int> unchangedModifiedIndex = new List<int>();
+        for (int i=0; i < modifiedWords.Count(); i++)
+        {
+            if (!modifiedWords[i].IsWordModified())
+            {
+                unchangedModifiedIndex.Add(i);
+            }
+        }
+        Random rnd = new Random();
+        int iWord = rnd.Next(0, unchangedModifiedIndex.Count());
+        if (unchangedModifiedIndex.Count()!=0)
+        {
+            int newiWord = unchangedModifiedIndex[iWord];
+            modifiedWords[newiWord].ChangeToUnderscore();
         }
     }
 
-    public bool Complete
+    public bool IsComplete()
     {
-        get
+        int totalDiff = 0;
+        for (int i = 0; i < originalWords.Count(); i++)
         {
-            return ScriptureText.Complete;
+            if (originalWords[i].EvalWord != modifiedWords[i].EvalWord)
+            {
+                totalDiff++;
+            }
         }
-    }  
+        return totalDiff==originalWords.Count();
+    }
+
+    public string GetModified()
+    {
+        string completeScripture = "";
+        foreach (Word word in modifiedWords)
+        {
+            //build my string of words with spaces
+            completeScripture += word.EvalWord + " ";
+        }
+        return completeScripture;
+    }
 }
