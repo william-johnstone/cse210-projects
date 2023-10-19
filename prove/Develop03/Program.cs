@@ -11,7 +11,7 @@ class Program
     {
         return File.ReadAllLines(_filename);
     }
-
+    //this method reads a random line in to use as the reference and scripture
     static void ScriptureLoad()
     {
         string[] _fileContent = ReadFile();
@@ -20,15 +20,15 @@ class Program
         string[] lineParts = line.Split('|');
         string _scriptureFullReference = lineParts[0];
         string _scriptureFullWords = lineParts[1];
-        reference.ReferenceSource = _scriptureFullReference;
-        scripture.ScriptureSource = _scriptureFullWords;
+        reference.referenceSource = _scriptureFullReference;
+        scripture.scriptureSource = _scriptureFullWords;
     }
     static void Main(string[] args)
     {
         Console.Clear();
         ScriptureLoad();
         //Call the initial scripture reference and scripture
-        Console.WriteLine($"{reference.GetReference()} {scripture.ScriptureSource}");
+        Console.WriteLine($"{reference.GetReference()} {scripture.scriptureSource}");
         scripture.ParseScriptureSource();
         string userInput = "";
 
@@ -39,14 +39,15 @@ class Program
             userInput = Console.ReadLine().ToLower();
             //clears the screen
             Console.Clear(); 
-            //Write out the scripture from the ModifiedScripture method
+            //Write out the scripture from the GetModified method
             scripture.ChangeWords();
             Console.WriteLine($"{reference.GetReference()} {scripture.GetModified()}");
+            //check if there are no words left to quit
             if (scripture.IsComplete())
             {
                 userInput = "quit";
             }
-            //check if there are no words left to quit
+            
         }
         Console.WriteLine("Goodbye");
     }

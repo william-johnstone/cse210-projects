@@ -1,12 +1,12 @@
 class Scripture
 {
-    public string ScriptureSource;
-    private static readonly List<Word> originalWords = new List<Word>();
+    public string scriptureSource;
+    private static List<Word> originalWords = new List<Word>();
     private List<Word> modifiedWords = new List<Word>();
 
     public void ParseScriptureSource()
     {
-        string[] individualWords = ScriptureSource.Split(" ");
+        string[] individualWords = scriptureSource.Split(" ");
         foreach (string individualWord in individualWords)
         {
             Word wordmod = new Word(individualWord);
@@ -14,19 +14,19 @@ class Scripture
             modifiedWords.Add(wordmod);
             originalWords.Add(wordorig);
         }
-
     }
 
     public void ChangeWords()
     {
         Random rnd = new Random();
+        //change between 2 and 5 words
         int hide = rnd.Next(2, 5);
+        //this loop makes sure that there are more words to hide from the rnd and also that not all words are hidden
         while (hide != 0 && !IsComplete()) 
         {
             ChangeSingleWord();
             hide--;
-        }
-        
+        }        
     }
     private void ChangeSingleWord()
     {
@@ -52,7 +52,7 @@ class Scripture
         int totalDiff = 0;
         for (int i = 0; i < originalWords.Count(); i++)
         {
-            if (originalWords[i].EvalWord != modifiedWords[i].EvalWord)
+            if (originalWords[i].evalWord != modifiedWords[i].evalWord)
             {
                 totalDiff++;
             }
@@ -66,7 +66,7 @@ class Scripture
         foreach (Word word in modifiedWords)
         {
             //build my string of words with spaces
-            completeScripture += word.EvalWord + " ";
+            completeScripture += word.evalWord + " ";
         }
         return completeScripture;
     }

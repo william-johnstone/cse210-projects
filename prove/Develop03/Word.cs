@@ -1,24 +1,25 @@
 class Word
 {
-    public string EvalWord
+    //This class needs to look at a word and change it to underscores or know if it already has been
+    public string evalWord
     {
         private set; get;
     }
     public Word(string word)
     {
-        EvalWord = word;
+        evalWord = word;
     }
     public void ChangeToUnderscore()
     {
         string underscores = "";
-        foreach (char letter in EvalWord)
+        foreach (char letter in evalWord)
         {
             underscores += "_";
         }
-        EvalWord = underscores;
+        evalWord = underscores;
     }
     public bool IsWordModified()
     {
-        return EvalWord[0]=='_';
+        return evalWord[0]=='_';
     }
 }
