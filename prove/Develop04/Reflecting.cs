@@ -1,6 +1,5 @@
 class Reflecting : Activity
 {
-    private readonly string _reflectingDescription = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
     static readonly List<string> reflectingPrompts = new()
     {
         "Think of a time when you stood up for someone else."
@@ -21,34 +20,37 @@ class Reflecting : Activity
         ,"How can you keep this experience in mind in the future?"
     };
 
-    private string ReflectingMessage()
-    {
-        return _reflectingDescription;
-    }
     //get  count of things in the list and create a random number
     static readonly int countPrompt = reflectingPrompts.Count;
     static readonly int countQuestion = reflectingQuestions.Count;
-
-
+    private DateTime _reflectingStart;
+    private DateTime _reflectingEnd;
+    private DateTime  _currentTime;
+    private DateTime _futureTime;
     public void ReflectingStart(int duration)
     {
-        int reflectingCounter = 0;
-        int shortDuration = 5;
-        int parts = duration / shortDuration;
-        string reflectingMessage = ReflectingMessage();
-        while (reflectingCounter < parts)
+        _reflectingStart = DateTime.Now;
+        _currentTime = _reflectingStart;
+        _futureTime = _reflectingStart.AddSeconds(duration);
+        Random rnd1 = new();
+        int tmpIndexPrompt = rnd1.Next(0, reflectingPrompts.Count());
+        while (_currentTime < _futureTime)
         {
-            int rndReflectingPrompt = new Random().Next(0, countPrompt);
-            int rndReflectingQuestion = new Random().Next(0, countQuestion);
-            string question = reflectingQuestions[rndReflectingQuestion];
-            string prompt = reflectingPrompts[rndReflectingPrompt];
-            Console.Clear();
-            Console.WriteLine($"{reflectingMessage}");
-            Thread.Sleep(100);
-            Console.WriteLine($"{prompt}");
-            Console.WriteLine($"{question}");            
-            ActivityTime(shortDuration);
-            reflectingCounter++;
+            Console.Clear();            
+            Console.WriteLine($"Prompt: {reflectingPrompts[tmpIndexPrompt]}");
+            Random rnd2 = new();
+            int tmpIndexQuestion = rnd2.Next(0, reflectingQuestions.Count());
+            Console.WriteLine($"Question: {reflectingQuestions[tmpIndexQuestion]}");
+            Spinner(8);
+
+            _currentTime = DateTime.Now;
         }
+        //after the breathing loop wrap up messages
+        Console.Clear();
+        _reflectingEnd = DateTime.Now;
+        Console.WriteLine("Great job on finishing!");
+        int totalTime = Convert.ToInt16(System.Math.Abs(_reflectingEnd.Subtract(_reflectingStart).TotalSeconds));
+        Console.WriteLine($"You spent {totalTime} seconds on this activity");
+        Spinner(5);
     }
 }

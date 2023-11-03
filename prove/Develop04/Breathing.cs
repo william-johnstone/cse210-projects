@@ -1,32 +1,38 @@
 class Breathing : Activity
 {
-    private readonly string _breathingDescription = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
-
-    // public Breathing(string one, string two)
-    // {
-    //     _breatheIn = one;
-    //     _breatheOut = two;
-    // }
-    private string BreathingMessage()
+    private DateTime _breathingStart;
+    private DateTime _breathingEnd;
+    private DateTime  _currentTime;
+    private DateTime _futureTime;
+    public void BreathPause()
     {
-        return _breathingDescription;
+        for (int a = 5; a>= 0; a--)
+        {
+            Console.Write("\rBreath for {0:00} ", a );
+            Thread.Sleep(1000);
+        }
     }
     public void BreathingStart(int duration)
     {
-        int breathingCounter = 0;
-        int shortDuration = 5;
-        int parts = duration / shortDuration;
-        string breathingMessage = BreathingMessage();
-        while (breathingCounter < parts)
+        _breathingStart = DateTime.Now;
+        _currentTime = _breathingStart;
+        _futureTime = _breathingStart.AddSeconds(duration);
+        while (_currentTime < _futureTime)
         {
             Console.Clear();
-            Console.WriteLine($"{breathingMessage}");
             Console.WriteLine("Breath In...");
-            ActivityTime(shortDuration);
+            BreathPause();
+            Console.Clear();
             Console.WriteLine("Breath Out...");
-            ActivityTime(shortDuration);
-            breathingCounter++;
-            
-        }        
+            BreathPause();
+            _currentTime = DateTime.Now;
+        }
+        //after the breathing loop wrap up messages
+        Console.Clear();
+        _breathingEnd = DateTime.Now;
+        Console.WriteLine("Great job on finishing!");
+        int totalTime = Convert.ToInt16(System.Math.Abs(_breathingEnd.Subtract(_breathingStart).TotalSeconds));
+        Console.WriteLine($"You spent {totalTime} seconds on this activity");
+        Spinner(5);
     }
 }
