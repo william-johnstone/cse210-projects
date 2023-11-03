@@ -8,7 +8,7 @@ class Breathing : Activity
     {
         for (int a = 5; a>= 0; a--)
         {
-            Console.Write("\rBreath for {0:00} ", a );
+            Console.Write("\r-{0:00} ", a );
             Thread.Sleep(1000);
         }
     }
@@ -20,10 +20,10 @@ class Breathing : Activity
         while (_currentTime < _futureTime)
         {
             Console.Clear();
-            Console.WriteLine("Breath In...");
+            Console.Write("Breath In...");
             BreathPause();
             Console.Clear();
-            Console.WriteLine("Breath Out...");
+            Console.Write("Breath Out...");
             BreathPause();
             _currentTime = DateTime.Now;
         }

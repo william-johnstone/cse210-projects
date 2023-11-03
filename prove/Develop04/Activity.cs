@@ -23,11 +23,15 @@ class Activity
         _activityChoice = _activity[choice-1];
         //messages that should be dynamic for each activity
         Console.WriteLine($"Welcome to the {_activityChoice} activity!");
+        Console.WriteLine();
         Console.WriteLine($"{_activityDescription[choice-1]}");
+        Console.WriteLine();
         Console.Write("How many seconds do you want to do the activity? ");
         userTime = Convert.ToInt16(Console.ReadLine());
+        Console.Clear();
         Console.Write("Prepare yourself...");
-        Thread.Sleep(5000);
+        Spinner(5);
+        Console.Clear();
         return userTime;
     }
     public void Spinner(int time)
