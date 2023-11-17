@@ -1,26 +1,13 @@
 public class SimpleGoal : Goal
 {
-    public bool Completed { get; set; }
-
-    public SimpleGoal(string name, int scoreValue) : base(name, "simple", scoreValue)
+    //goalType, goalName, goalDescription, goalCompletionStatus, goalPoints
+    public SimpleGoal(int goalType, string goalName, string goalDescription, bool goalCompletionStatus, int goalPoints) : base(goalType, goalName, goalPoints)
     {
-        Completed = false;
+
     }
 
-    public void MarkComplete()
+    public override int GetPoints()
     {
-        Completed = true;
-    }
-
-    public override void TrackProgress()
-    {
-        if (Completed)
-        {
-            Console.WriteLine($"Goal {Name} is complete.");
-        }
-        else
-        {
-            Console.WriteLine($"Goal {Name} is not yet complete.");
-        }
+        return base.GetPoints();
     }
 }

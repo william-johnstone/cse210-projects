@@ -1,32 +1,42 @@
 public class ChecklistGoal : Goal
 {
-    public int RequiredTimes { get; set; }
-    public int TimesCompleted { get; set; }
-    public int BonusValue { get; set; }
-
-    public ChecklistGoal(string name, int targetCount, int scoreValue, int bonusValue) : base(name, "checklist", scoreValue)
+    private int _goalChecklistCount;
+    private int _goalChecklistCountMax;
+    //goalType, goalName, goalDescription, goalCompletionStatus, goalPoints, goalChecklistMax, goalChecklistCount
+    public ChecklistGoal(int goalType, string goalName, string goalDescription, bool goalCompletionStatus, int goalPoints, int goalChecklistMax, int goalChecklistCount) : base(goalType, goalName, goalPoints)
     {
-        RequiredTimes = targetCount;
-        BonusValue = bonusValue;
-        TimesCompleted = 0;
+
+    }
+    private void ChecklistCount(int goalChecklistCount)
+    {
+        _goalChecklistCount = goalChecklistCount;
+    }
+    private void ChecklistCountMax(int goalChecklistMax)
+    {
+        _goalChecklistCountMax = goalChecklistMax;
     }
 
-    public void MarkComplete()
+    public override int GetPoints()
     {
-        TimesCompleted++;
-        if (TimesCompleted == RequiredTimes)
+        if (IsGoalComplete())
         {
-            _scoreValue += BonusValue;
+            return (base.GetPoints() * _goalChecklistCount) + base.GetPoints();
+        }
+        else 
+        {
+            return base.GetPoints() * _goalChecklistCount;
+        }
+    }
+    public override void RecordEvent()
+    {
+        base.RecordEvent();
+        _goalChecklistCount++;
+
+        if (_goalChecklistCount == _goalChecklistCountMax)
+        {
+            SetGoalComplete(true);
+            Console.WriteLine($"Checklist goal '{GetName}' is now complete.");
         }
     }
 
-    public override void TrackProgress()
-    {
-        Console.WriteLine($"Goal {_name} has been completed {TimesCompleted} times out of {RequiredTimes} required times.");
-    }
-
-    public override int CalculateScore()
-    {
-        return _scoreValue;
-    }
 }
