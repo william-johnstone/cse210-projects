@@ -1,29 +1,29 @@
 // Checklist goal class
 public class ChecklistGoal : Goal
 {
-    private int requiredEvents;
-    private int completedEvents;
-
-    public ChecklistGoal(string name, int value, int requiredEvents) : base(name, value)
+    private int _requiredEvents;
+    private int _completedEvents;
+    
+    public ChecklistGoal(string name, string description, int value, int requiredEvents, int bonus) : base(name, description, value)
     {
-        this.requiredEvents = requiredEvents;
-        this.completedEvents = 0;
+        this._requiredEvents = requiredEvents;
+        this._completedEvents = 0;
     }
 
     public override void RecordEvent()
     {
         Console.WriteLine($"Event recorded for checklist goal '{Name}'. You gained {Value} points.");
 
-        completedEvents++;
-        if (completedEvents == requiredEvents)
+        _completedEvents++;
+        if (_completedEvents == _requiredEvents)
         {
             Console.WriteLine($"Congratulations! You completed the checklist goal '{Name}' and earned an extra bonus.");
-            Console.WriteLine($"You gained an additional {Value * 2} points as a bonus.");
+            Console.WriteLine($"You gained an additional {Bonus} points as a bonus.");
         }
     }
 
     public override void DisplayDetails()
     {
-        Console.WriteLine($"[Checklist Goal] Name: {Name}, Value: {Value}, Required Events: {requiredEvents}, Completed Events: {completedEvents}");
+        Console.WriteLine($"[Checklist Goal] Name: {Name}, Description: {Description}, Value: {Value}, Required Events: {_requiredEvents}, Completed Events: {_completedEvents}, Bonus: {Bonus}");
     }
 }

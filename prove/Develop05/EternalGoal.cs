@@ -1,7 +1,7 @@
 // Eternal goal class
 public class EternalGoal : Goal
 {
-    public EternalGoal(string name, int value) : base(name, value)
+    public EternalGoal(string name, string description, int value) : base(name, description, value)
     {
     }
 
@@ -12,6 +12,6 @@ public class EternalGoal : Goal
 
     public override void DisplayDetails()
     {
-        Console.WriteLine($"[Eternal Goal] Name: {Name}, Value: {Value}");
+        Console.WriteLine($"[Eternal Goal] Name: {Name}, Description: {Description}, Value: {Value}");
     }
 }

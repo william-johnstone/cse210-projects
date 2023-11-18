@@ -46,7 +46,7 @@ public class User
         {
             foreach (Goal goal in goals)
             {
-                writer.WriteLine($"{goal.GetType().Name},{goal.Name},{goal.Value}");
+                writer.WriteLine($"{goal.GetType().Name}|{goal.Name}|{goal.Description}|{goal.Value}|{goal.Bonus}");
             }
         }
     }
@@ -63,25 +63,48 @@ public class User
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string[] parts = line.Split(',');
+                    string[] parts = line.Split('|');
                     if (parts.Length == 3)
                     {
                         string goalType = parts[0];
                         string goalName = parts[1];
-                        int goalValue = int.Parse(parts[2]);
-
+                        string goalDescription = parts[2];
+                        int goalValue = int.Parse(parts[3]);
                         Goal goal;
 
                         switch (goalType)
                         {
                             case "SimpleGoal":
-                                goal = new SimpleGoal(goalName, goalValue);
+                                goal = new SimpleGoal(goalName, goalDescription, goalValue);
                                 break;
                             case "EternalGoal":
-                                goal = new EternalGoal(goalName, goalValue);
+                                goal = new EternalGoal(goalName, goalDescription, goalValue);
                                 break;
+                            default:
+                                goal = null;
+                                break;
+                        }
+
+                        if (goal != null)
+                        {
+                            goals.Add(goal);
+                        }
+                    }
+                    else if (parts.Length == 5)
+                    {
+                        string goalType = parts[0];
+                        string goalName = parts[1];
+                        string goalDescription = parts[2];
+                        int goalValue = int.Parse(parts[3]);
+                        int requiredEvents = int.Parse(parts[4]);
+                        int bonus = int.Parse(parts[5]);
+
+                        Goal goal;
+
+                        switch (goalType)
+                        {
                             case "ChecklistGoal":
-                                goal = new ChecklistGoal(goalName, goalValue, 3); // Assuming a default of 3 required events for checklist goals
+                                goal = new ChecklistGoal(goalName, goalDescription, goalValue, requiredEvents, bonus); // Assuming a default of 3 required events for checklist goals
                                 break;
                             default:
                                 goal = null;
@@ -98,7 +121,7 @@ public class User
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading goals from file: {ex.Message}");
+            Console.WriteLine($"Could not load goals from file: {ex.Message}");
         }
     }
 }

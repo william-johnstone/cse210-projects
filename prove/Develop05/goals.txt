@@ -1,0 +1,3 @@
+SimpleGoal|ns1|ds1|10|0
+EternalGoal|en1|ed1|50|0
+ChecklistGoal|cn1|cd1|5|0

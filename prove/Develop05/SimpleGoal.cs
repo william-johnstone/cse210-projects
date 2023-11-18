@@ -1,7 +1,7 @@
 // Simple goal class
 public class SimpleGoal : Goal
 {
-    public SimpleGoal(string name, int value) : base(name, value)
+    public SimpleGoal(string name, string description, int value) : base(name, description, value)
     {
     }
 
@@ -12,6 +12,6 @@ public class SimpleGoal : Goal
 
     public override void DisplayDetails()
     {
-        Console.WriteLine($"[Simple Goal] Name: {Name}, Value: {Value}");
+        Console.WriteLine($"[Simple Goal] Name: {Name}, Description: {Description}, Value: {Value}");
     }
 }

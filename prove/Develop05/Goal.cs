@@ -1,23 +1,33 @@
 // Base class for all goals
 public abstract class Goal
 {
-    private string name;
-    private int value;
-
-    public Goal(string name, int value)
+    private string _name;
+    private string _description;
+    private int _value;
+    private int _bonus;
+    public Goal(string name, string description, int value, int bonus=0)
     {
-        this.name = name;
-        this.value = value;
+        this._name = name;
+        this._description = description;
+        this._value = value;
+        this._bonus = bonus;
     }
 
     public string Name
     {
-        get { return name; }
+        get { return _name; }
     }
-
+    public string Description
+    {
+        get {return _description;}
+    }
     public int Value
     {
-        get { return value; }
+        get { return _value; }
+    }
+    public int Bonus
+    {
+        get { return _bonus; }
     }
 
     // Abstract method to record an event and update the score
