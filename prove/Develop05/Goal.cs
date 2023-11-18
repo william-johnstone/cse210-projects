@@ -1,43 +1,28 @@
-public class Goal
+// Base class for all goals
+public abstract class Goal
 {
-    private int _amountPoints;
-    private bool _goalCompleted;
-    private string _name;
-    private int _goalType;
-    private string _goalName;
-    private int _goalPoints;
+    private string name;
+    private int value;
 
-    public Goal(int goalType, string goalName, int goalPoints)
+    public Goal(string name, int value)
     {
-        _goalType = goalType;
-        _goalName = goalName;
-        _goalPoints = goalPoints;
+        this.name = name;
+        this.value = value;
     }
 
-    public virtual string GetName()
+    public string Name
     {
-        return _name;
-    }
-    public virtual int GetPoints()
-    {
-        return _amountPoints;
-    }
-    public virtual void RecordEvent()
-    {
-        _goalCompleted = true;
-        Console.WriteLine($"Goal Event marked for {_name}.");
+        get { return name; }
     }
 
-    public bool IsGoalComplete()
+    public int Value
     {
-        return _goalCompleted;
+        get { return value; }
     }
-    protected void SetGoalComplete(bool completed)
-    {
-        _goalCompleted = completed;
-    }
-    public virtual void CreateGoal()
-    {
-        //override allowed for derived classes
-    }
+
+    // Abstract method to record an event and update the score
+    public abstract void RecordEvent();
+
+    // Abstract method to display goal details
+    public abstract void DisplayDetails();
 }

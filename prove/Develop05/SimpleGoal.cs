@@ -1,13 +1,17 @@
+// Simple goal class
 public class SimpleGoal : Goal
 {
-    //goalType, goalName, goalDescription, goalCompletionStatus, goalPoints
-    public SimpleGoal(int goalType, string goalName, string goalDescription, bool goalCompletionStatus, int goalPoints) : base(goalType, goalName, goalPoints)
+    public SimpleGoal(string name, int value) : base(name, value)
     {
-
     }
 
-    public override int GetPoints()
+    public override void RecordEvent()
     {
-        return base.GetPoints();
+        Console.WriteLine($"Goal '{Name}' completed! You gained {Value} points.");
+    }
+
+    public override void DisplayDetails()
+    {
+        Console.WriteLine($"[Simple Goal] Name: {Name}, Value: {Value}");
     }
 }

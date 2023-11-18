@@ -1,18 +1,17 @@
+// Eternal goal class
 public class EternalGoal : Goal
 {
-    public EternalGoal(int goalType, string goalName, string goalDescription, int goalPoints) : base(goalType, goalName, goalPoints)
+    public EternalGoal(string name, int value) : base(name, value)
     {
-        
-    }
-
-    public override int GetPoints()
-    {
-        return base.GetPoints();
     }
 
     public override void RecordEvent()
     {
-        base.RecordEvent();
-        Console.WriteLine($"Eternal goal '{GetName}' Points added: {GetPoints}.");
+        Console.WriteLine($"Recorded progress for eternal goal '{Name}'. You gained {Value} points.");
+    }
+
+    public override void DisplayDetails()
+    {
+        Console.WriteLine($"[Eternal Goal] Name: {Name}, Value: {Value}");
     }
 }

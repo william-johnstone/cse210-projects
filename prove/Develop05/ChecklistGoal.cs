@@ -1,42 +1,29 @@
+// Checklist goal class
 public class ChecklistGoal : Goal
 {
-    private int _goalChecklistCount;
-    private int _goalChecklistCountMax;
-    //goalType, goalName, goalDescription, goalCompletionStatus, goalPoints, goalChecklistMax, goalChecklistCount
-    public ChecklistGoal(int goalType, string goalName, string goalDescription, bool goalCompletionStatus, int goalPoints, int goalChecklistMax, int goalChecklistCount) : base(goalType, goalName, goalPoints)
-    {
+    private int requiredEvents;
+    private int completedEvents;
 
-    }
-    private void ChecklistCount(int goalChecklistCount)
+    public ChecklistGoal(string name, int value, int requiredEvents) : base(name, value)
     {
-        _goalChecklistCount = goalChecklistCount;
-    }
-    private void ChecklistCountMax(int goalChecklistMax)
-    {
-        _goalChecklistCountMax = goalChecklistMax;
+        this.requiredEvents = requiredEvents;
+        this.completedEvents = 0;
     }
 
-    public override int GetPoints()
-    {
-        if (IsGoalComplete())
-        {
-            return (base.GetPoints() * _goalChecklistCount) + base.GetPoints();
-        }
-        else 
-        {
-            return base.GetPoints() * _goalChecklistCount;
-        }
-    }
     public override void RecordEvent()
     {
-        base.RecordEvent();
-        _goalChecklistCount++;
+        Console.WriteLine($"Event recorded for checklist goal '{Name}'. You gained {Value} points.");
 
-        if (_goalChecklistCount == _goalChecklistCountMax)
+        completedEvents++;
+        if (completedEvents == requiredEvents)
         {
-            SetGoalComplete(true);
-            Console.WriteLine($"Checklist goal '{GetName}' is now complete.");
+            Console.WriteLine($"Congratulations! You completed the checklist goal '{Name}' and earned an extra bonus.");
+            Console.WriteLine($"You gained an additional {Value * 2} points as a bonus.");
         }
     }
 
+    public override void DisplayDetails()
+    {
+        Console.WriteLine($"[Checklist Goal] Name: {Name}, Value: {Value}, Required Events: {requiredEvents}, Completed Events: {completedEvents}");
+    }
 }
