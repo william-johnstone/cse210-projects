@@ -64,7 +64,7 @@ public class User
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split('|');
-                    if (parts.Length == 3)
+                    if (parts.Length == 4)
                     {
                         string goalType = parts[0];
                         string goalName = parts[1];
@@ -90,7 +90,7 @@ public class User
                             goals.Add(goal);
                         }
                     }
-                    else if (parts.Length == 5)
+                    else if (parts.Length == 6)
                     {
                         string goalType = parts[0];
                         string goalName = parts[1];
@@ -104,7 +104,7 @@ public class User
                         switch (goalType)
                         {
                             case "ChecklistGoal":
-                                goal = new ChecklistGoal(goalName, goalDescription, goalValue, requiredEvents, bonus); // Assuming a default of 3 required events for checklist goals
+                                goal = new ChecklistGoal(goalName, goalDescription, goalValue, requiredEvents, bonus); 
                                 break;
                             default:
                                 goal = null;
@@ -119,6 +119,7 @@ public class User
                 }
             }
         }
+        //catch exceptions if the goals file is corrupt or doesn't match correct data
         catch (Exception ex)
         {
             Console.WriteLine($"Could not load goals from file: {ex.Message}");

@@ -1,7 +1,18 @@
 ﻿class Program
 {
-    //This is the main program where the menu and some of the responses information will be inputted
-    //Have a User class to allow potential for multiple users in the future, the user object is instantiated in Main
+    /*  This is the main program where the menu and some of the responses information will be inputted
+        Have a User class to allow potential for multiple users in the future, the user object is instantiated in Main
+        Can save and load goals with | delimeter.
+        using an exception on loading file to detect if it fits the correct format
+        methods are clean and names are easy to understand
+        using bool conditions to get valid values
+        using switches to quickly get to correct methods
+        variables are private or protected
+        derived class used
+        method overriding used for checklist class
+        using Thread.Sleep(1500) for a pause to cleanup screen between various actions
+        
+    */
     static void Main()
     {
         User user = new User();
