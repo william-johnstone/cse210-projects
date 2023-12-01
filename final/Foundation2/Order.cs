@@ -1,24 +1,24 @@
 class Order
 {
-    private List<Product> products;
-    private Customer customer;
+    private List<Product> _products;
+    private Customer _customer;
 
     public Order(Customer customer, List<Product> products)
     {
-        this.customer = customer;
-        this.products = products;
+        _customer = customer;
+        _products = products;
     }
 
     public decimal CalculateTotalCost()
     {
         decimal total = 0;
-        foreach (var product in products)
+        foreach (var product in _products)
         {
             total += product.GetTotalPrice();
         }
 
         // Adding shipping cost based on if the customer is in USA or not
-        if (customer.IsInUSA() is true)
+        if (_customer.IsInUSA() is true)
         {
             total += 5;
         }
@@ -34,7 +34,7 @@ class Order
     {
         //write out Packing Label and then loop through products and print a newline for each one
         string packingLabel = "Packing Label:\n";
-        foreach (var product in products)
+        foreach (var product in _products)
         {
             packingLabel += $"{product.GetProductInfo()}\n";
         }
@@ -44,6 +44,6 @@ class Order
 
     public string GetShippingLabel()
     {
-        return $"Shipping Label:\n{nameof(customer)}: {customer.GetName()}\n{nameof(customer.GetAddress)}: {customer.GetAddress().GetFullAddress()}";
+        return $"Shipping Label:\n{nameof(_customer)}: {_customer.GetName()}\n{nameof(_customer.GetAddress)}: {_customer.GetAddress().GetFullAddress()}";
     }
 }
