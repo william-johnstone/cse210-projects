@@ -10,7 +10,7 @@ class Swimming : Activity
 
     public override double GetDistance()
     {
-        return _laps * 50 / 1000.0;  // Convert laps to kilometers
+        return _laps * 50 / 1000.0 * 0.62;  // Convert laps to miles
     }
 
     public override double GetSpeed()
@@ -26,6 +26,6 @@ class Swimming : Activity
     public override string GetSummary()
     {
         return base.GetSummary() +
-            $": Distance {GetDistance():F1} km, Speed {GetSpeed():F1} kph, Pace: {GetPace():F1} min per km";
+            $": Laps ({_laps}), Distance ({GetDistance():F1} km), Speed ({GetSpeed():F1} mph), Pace: ({GetPace():F1} min per mile)\n";
     }
 }
