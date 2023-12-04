@@ -44,6 +44,6 @@ class Order
 
     public string GetShippingLabel()
     {
-        return $"Shipping Label:\n{nameof(_customer)}: {_customer.GetName()}\n{nameof(_customer.GetAddress)}: {_customer.GetAddress().GetFullAddress()}";
+        return $"Shipping Label:\nCustomer: {_customer.GetName()}\nAddress: {_customer.GetAddress().GetFullAddress()}";
     }
 }
