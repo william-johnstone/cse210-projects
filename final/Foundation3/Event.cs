@@ -27,6 +27,6 @@ class Event
 
     public string GenerateShortDescription()
     {
-        return $"Short Description:\nType: {GetType().Name}\nTitle: {_title}\nDate: {_date.ToShortDateString()}\n";
+        return $"Short Description:\nType: {GetType().Name}\nTitle: {_title}\nDate: {_date.ToShortDateString()}\n-------------------------\n";
     }
 }

@@ -2,6 +2,7 @@ class Program
 {
     static void Main()
     {
+        Console.Clear();
         // Creating addresses
         Address lectureAddress = new Address("123 University St", "College Town", "CA", "USA");
         Address receptionAddress = new Address("456 Celebration Ave", "Party City", "NY", "USA");
@@ -13,14 +14,17 @@ class Program
         OutdoorGathering outdoorGatheringEvent = new OutdoorGathering("Summer Picnic", "Enjoy outdoor activities", DateTime.Now.AddDays(30), new TimeSpan(12, 0, 0), outdoorGatheringAddress, "Sunny with a slight breeze");
 
         // Displaying marketing messages for each event
+        Console.WriteLine("-------------------------");
         Console.WriteLine(lectureEvent.GenerateStandardDetails());
         Console.WriteLine(lectureEvent.GenerateFullDetailsForLecture());
         Console.WriteLine(lectureEvent.GenerateShortDescription());
 
+        Console.WriteLine("-------------------------");
         Console.WriteLine(receptionEvent.GenerateStandardDetails());
         Console.WriteLine(receptionEvent.GenerateFullDetailsForReception());
         Console.WriteLine(receptionEvent.GenerateShortDescription());
 
+        Console.WriteLine("-------------------------");
         Console.WriteLine(outdoorGatheringEvent.GenerateStandardDetails());
         Console.WriteLine(outdoorGatheringEvent.GenerateFullDetailsForOutdoorGathering());
         Console.WriteLine(outdoorGatheringEvent.GenerateShortDescription());
