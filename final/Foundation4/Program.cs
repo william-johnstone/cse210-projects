@@ -17,6 +17,7 @@ class Program
             new Swimming(DateTime.Now.AddDays(0), 33, 50)
         };
 
+        Console.WriteLine("Activity Results:");
         // Displaying summaries for each activity
         foreach (var activity in activities)
         {
